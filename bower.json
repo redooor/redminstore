@@ -1,0 +1,40 @@
+{
+  "name": "redminstore",
+  "version": "0.1.0",
+  "description": "RedminStore is a frontend theme for Ecommerce sites using RedminPortal as backend.",
+  "keywords": [
+    "package",
+    "laravel",
+    "redooor",
+    "redmin",
+    "portal",
+    "ecommerce",
+    "frontend",
+    "store"
+  ],
+  "main": "public/assets/css/redminstore.css",
+  "moduleType": [
+    "globals"
+  ],
+  "authors": [
+    "Redooor LLP"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/redooor/redminstore",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src",
+    "vendor",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "bootstrap": "~3.3.4",
+    "jquery-ui": "~1.11.2",
+    "eonasdan-bootstrap-datetimepicker": "~4.0.0",
+    "redmaterials": "master"
+  }
+}

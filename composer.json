@@ -1,7 +1,7 @@
 {
     "name": "redooor/redminstore",
-    "description": "RedminStore is a backend administrating tool for Content Management and Ecommerce sites.",
-    "keywords": ["package", "laravel", "redooor", "redmin", "portal", "ecommerce", "backend"],
+    "description": "RedminStore is a frontend theme for Ecommerce sites using RedminPortal as backend.",
+    "keywords": ["package", "laravel", "redooor", "redmin", "portal", "ecommerce", "frontend", "store"],
     "license": "MIT",
     "authors": [
         {
@@ -26,12 +26,11 @@
 	},
     "autoload": {
         "classmap": [
-            "src/database/seeds",
             "tests/bases",
             "tests/RedminTestCase.php"
         ],
         "psr-4": {
-            "Redooor\\Redminportal\\": "src/"
+            "Redooor\\Redminstore\\": "src/"
         }
     },
     "minimum-stability": "dev",

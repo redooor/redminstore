@@ -6,7 +6,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h1>RedminStore <small>by Redooor</small></h1>
-                    <p>This is a demo template to help you get started with RedminCMS.</p>
+                    <p>This is a demo template to help you get started with RedminPortal CMS.</p>
                     <p>Try adding a few pages in RedminPortal and watch the page being generated automatically.</p>
                 </div>
             </div>

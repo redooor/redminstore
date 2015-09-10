@@ -6,3 +6,4 @@
 Focus on supporting Laravel 5.1 and RedminPortal 0.3.0
 
 ### New feature:
+1. Automaticall generate Pages from RedminPortal.

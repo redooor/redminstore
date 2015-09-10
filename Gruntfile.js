@@ -103,28 +103,6 @@ module.exports = function (grunt) {
                 src: 'bower_components/bootstrap/dist/css/bootstrap.min.css',
                 dest: 'src/public/css/bootstrap.min.css'
             },
-            jqueryui: {
-                expand: true,
-                cwd: 'bower_components/jquery-ui/themes/blitzer/',
-                src: '**',
-                dest: 'src/public/css/jquery-ui/themes/blitzer/'
-            },
-            jqueryuijs: {
-                src: 'bower_components/jquery-ui/jquery-ui.min.js',
-                dest: 'src/public/js/jquery-ui/jquery-ui.min.js'
-            },
-            momentjs: {
-                src: 'bower_components/moment/min/moment.min.js',
-                dest: 'src/public/js/moment/moment.min.js'
-            },
-            datetimepickerjs: {
-                src: 'bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
-                dest: 'src/public/js/datetimepicker/bootstrap-datetimepicker.min.js'
-            },
-            datetimepickercss: {
-                src: 'bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
-                dest: 'src/public/css/datetimepicker/bootstrap-datetimepicker.min.css'
-            },
             redmaterialsjs: {
                 src: 'bower_components/redmaterials/dist/js/redmaterials.min.js',
                 dest: 'src/public/js/redmaterials.min.js'
@@ -158,7 +136,7 @@ module.exports = function (grunt) {
     grunt.registerTask('less-compile', ['less:compileCore', 'autoprefixer:core', 'usebanner', 'cssmin:minifyCore']);
     
     // Distribute all assets to public folder
-    grunt.registerTask('dist-assets', ['copy:fonts', 'copy:jquery', 'copy:bootstrapjs', 'copy:bootstrapcss', 'copy:jqueryui', 'copy:jqueryuijs', 'copy:momentjs', 'copy:datetimepickerjs', 'copy:datetimepickercss', 'copy:redmaterialsjs', 'copy:redmaterialscss']);
+    grunt.registerTask('dist-assets', ['copy:fonts', 'copy:jquery', 'copy:bootstrapjs', 'copy:bootstrapcss', 'copy:redmaterialsjs', 'copy:redmaterialscss']);
     
     // Default task, compile and distribute all assets to public folder
     grunt.registerTask('default', ['less-compile', 'dist-assets']);

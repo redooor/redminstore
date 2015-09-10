@@ -1,0 +1,26 @@
+/*!
+ * redminstore v0.1.0
+ * Homepage: https://github.com/redooor/redminstore
+ * Copyright 2014-2015 Redooor LLP
+ * Licensed under MIT
+*/
+
+/* Overwrite Bootstrap style */
+body {
+  padding-top: 70px;
+}
+/* Shift down to make space for navbar */
+body.modal-open,
+.modal-open .navbar-fixed-top {
+  margin-right: 0px;
+}
+/* Fix strange right margin when opening modal dialog */
+.navbar-brand > img {
+  display: inline-block;
+}
+/* Redminstore */
+.brand-nav-logo {
+  height: 18px;
+  vertical-align: text-top;
+}
+/*# sourceMappingURL=redminstore.css.map */

@@ -12,7 +12,7 @@ class RedminstoreServiceProvider extends ServiceProvider
     public function boot()
     {
         // Get routes
-        include __DIR__.'/app/Http/routes.php';
+        include __DIR__.'/App/Http/routes.php';
         
         // Get views
         $this->loadViewsFrom(__DIR__.'/resources/views', 'redminstore');
@@ -33,7 +33,6 @@ class RedminstoreServiceProvider extends ServiceProvider
         // Publish a config file
         $this->publishes([
             __DIR__.'/config/image.php' => config_path('vendor/redooor/redminstore/image.php'),
-            __DIR__.'/config/menu.php' => config_path('vendor/redooor/redminstore/menu.php'),
             __DIR__.'/config/auth.php' => config_path('vendor/redooor/redminstore/auth.php')
         ], 'config');
     }
@@ -64,7 +63,6 @@ class RedminstoreServiceProvider extends ServiceProvider
         });
         
         $this->registerResources('image', 'redminstore::image');
-        $this->registerResources('menu', 'redminportal::menu');
         
         // Change Authentication model
         $this->registerResources('auth', 'auth');

@@ -7,5 +7,7 @@
 */
 
 Route::group(['namespace' => 'Redooor\Redminstore\App\Http\Controllers'], function () {
-    Route::controller('/', 'HomeController');
+    Route::get('/', 'PageController@showHome');
+    Route::get('page', 'PageController@showHome');
+    Route::get('page/{slug}', 'PageController@loadPage');
 });

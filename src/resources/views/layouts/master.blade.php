@@ -24,14 +24,18 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a href="{{ URL::to('admin') }}" class="navbar-brand">
+                        <a href="{{ URL::to('/') }}" class="navbar-brand">
                             <img src="{{ URL::to('vendor/redooor/redminstore/img/favicon.png') }}" title="RedminStore" class="brand-nav-logo"> RedminStore
                         </a>
                     </div>
                     <div class="navbar-collapse collapse">
+                        @if (count($pages) > 0)
                         <ul class="nav navbar-nav">
-                            <li><a href="{{ URL::to('/') }}">{{ Lang::get('redminstore::menus.home') }}</a></li>
+                            @foreach ($pages as $page)
+                            <li><a href="{{ URL::to('page/' . $page->slug) }}">{{ $page->title }}</a></li>
+                            @endforeach
                         </ul>
+                        @endif
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{{ URL::to('logout') }}">{{ Lang::get('redminstore::menus.logout') }}</a></li>
                         </ul>

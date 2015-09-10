@@ -50,15 +50,12 @@ class RedminstoreServiceProvider extends ServiceProvider
             require_once $autoloader;
         }
         
-        $this->app->register('Illuminate\Html\HtmlServiceProvider');
         $this->app->register('Orchestra\Imagine\ImagineServiceProvider');
         
         $this->app->booting(function() {
             $loader = \Illuminate\Foundation\AliasLoader::getInstance();
             $loader->alias('Redminstore', 'Redooor\Redminstore\Facades\Redminstore');
             $loader->alias('Redminportal', 'Redooor\Redminportal\Facades\Redminportal');
-            $loader->alias('Form', 'Illuminate\Html\FormFacade');
-            $loader->alias('HTML', 'Illuminate\Html\HtmlFacade');
             $loader->alias('Imagine', 'Orchestra\Imagine\Facade');
         });
         

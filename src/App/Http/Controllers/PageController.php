@@ -10,6 +10,11 @@ class PageController extends Controller
         return view('redminstore::pages.home');
     }
     
+    public function show404()
+    {
+        return view('redminstore::general.404');
+    }
+    
     public function loadPage($slug)
     {
         $inputs = array('slug' => $slug);

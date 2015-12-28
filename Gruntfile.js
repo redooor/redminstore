@@ -18,6 +18,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-exec');
 
     var configBridge = grunt.file.readJSON('./bower_components/bootstrap/grunt/configBridge.json', {
         encoding: 'utf8'
@@ -127,6 +128,9 @@ module.exports = function (grunt) {
                     base: '.'
                 }
             }
+        },
+        exec: {
+            publish_public: 'php ../../../artisan vendor:publish --provider="Redooor\\Redminstore\\RedminstoreServiceProvider" --tag="public" --force'
         }
     });
 
@@ -137,6 +141,8 @@ module.exports = function (grunt) {
     
     // Distribute all assets to public folder
     grunt.registerTask('dist-assets', ['copy:fonts', 'copy:jquery', 'copy:bootstrapjs', 'copy:bootstrapcss', 'copy:redmaterialsjs', 'copy:redmaterialscss']);
+    
+    grunt.registerTask('publish-assets', ['exec:publish_public']);
     
     // Default task, compile and distribute all assets to public folder
     grunt.registerTask('default', ['less-compile', 'dist-assets']);

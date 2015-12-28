@@ -16,11 +16,11 @@
 		"illuminate/html": "~5.0",
         "doctrine/dbal": "~2.4",
         "orchestra/imagine": "3.1.*",
-        "phansys/getid3": "2.1.*@dev"
+        "phansys/getid3": "2.1.*@dev",
+        "redooor/redminportal": "dev-develop"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
-		"phpspec/phpspec": "~2.1",
 		"mockery/mockery": "0.9.*",
         "orchestra/testbench": "3.1.*"
 	},

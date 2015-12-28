@@ -7,28 +7,24 @@ class PageController extends Controller
 {
     public function showHome()
     {
-        $pages = Page::where('private', false)->get();
-        
-        return view('redminstore::pages.home')->with('pages', $pages);
+        return view('redminstore::pages.home');
     }
     
     public function loadPage($slug)
     {
-        $pages = Page::where('private', false)->get();
-        
         $inputs = array('slug' => $slug);
         $rules = array('slug' => 'required|alpha_dash');
         $validation = Validator::make($inputs, $rules);
         
         if ($validation->passes()) {
             $page = Page::where('slug', $slug)->where('private', false)->first();
+            
             if ($page) {
                 return view('redminstore::pages.view')
-                    ->with('pages', $pages)
-                    ->with('page_content', $page->content);
+                    ->with('page', $page);
             }
         }
         
-        return view('redminstore::general.404')->with('pages', $pages);
+        return view('redminstore::general.404');
     }
 }

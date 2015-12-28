@@ -1,6 +1,7 @@
 <?php
 
 return array(
-    'home' => 'Home',
-    'logout' => 'Logout',
+    'brandname' => 'RedminStore',
+    'adminlogin' => 'Admin Login',
+    'pages' => 'Pages'
 );

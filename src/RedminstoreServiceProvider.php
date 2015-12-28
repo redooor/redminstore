@@ -29,12 +29,6 @@ class RedminstoreServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/public' => public_path('vendor/redooor/redminstore'),
         ], 'public');
-        
-        // Publish a config file
-        $this->publishes([
-            __DIR__.'/config/image.php' => config_path('vendor/redooor/redminstore/image.php'),
-            __DIR__.'/config/auth.php' => config_path('vendor/redooor/redminstore/auth.php')
-        ], 'config');
     }
 
     /**
@@ -58,29 +52,5 @@ class RedminstoreServiceProvider extends ServiceProvider
             $loader->alias('Redminportal', 'Redooor\Redminportal\Facades\Redminportal');
             $loader->alias('Imagine', 'Orchestra\Imagine\Facade');
         });
-        
-        $this->registerResources('image', 'redminstore::image');
-        
-        // Change Authentication model
-        $this->registerResources('auth', 'auth');
-    }
-    
-    /**
-     * Register the package resources.
-     *
-     * @return void
-     */
-    protected function registerResources($name, $setname)
-    {
-        $userConfigFile    = config_path('vendor/redooor/redminstore/' . $name . '.php');
-        $packageConfigFile = __DIR__.'/config/' . $name . '.php';
-        $config            = $this->app['files']->getRequire($packageConfigFile);
-
-        if (file_exists($userConfigFile)) {
-            $userConfig = $this->app['files']->getRequire($userConfigFile);
-            $config     = array_replace_recursive($config, $userConfig);
-        }
-
-        $this->app['config']->set($setname, $config);
     }
 }

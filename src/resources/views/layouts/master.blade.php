@@ -37,6 +37,19 @@
                             </li>
                         </ul>
                         @endif
+                        <?php $menu_posts = Redooor\Redminstore\App\Models\UI\Menu::getPosts(); ?>
+                        @if (count($menu_posts) > 0)
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('redminstore::menus.posts') }} <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    @foreach ($menu_posts as $menu_post)
+                                    <li><a href="{{ URL::to('post/' . $menu_post->slug) }}">{{ $menu_post->title }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        </ul>
+                        @endif
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{{ url('/admin') }}">{{ trans('redminstore::menus.adminlogin') }}</a></li>
                         </ul>

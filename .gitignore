@@ -7,4 +7,3 @@ composer.lock
 /.phpunit.cache
 /bootstrap/cache/*.php
 /storage/framework/views/*.php
-/src/public/build

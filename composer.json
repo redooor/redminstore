@@ -1,7 +1,7 @@
 {
     "name": "redooor/redminstore",
-    "description": "RedminStore is a frontend theme for Ecommerce sites using RedminPortal as backend.",
-    "keywords": ["package", "laravel", "redooor", "redmin", "portal", "ecommerce", "frontend", "store"],
+    "description": "RedminStore is a Laravel 12 + Inertia storefront theme for ecommerce sites using RedminPortal as the backend administration tool.",
+    "keywords": ["package", "laravel", "redooor", "redmin", "portal", "ecommerce", "frontend", "store", "inertia", "vue", "tailwind"],
     "license": "MIT",
     "authors": [
         {
@@ -11,28 +11,53 @@
         }
     ],
     "require": {
-        "php": ">=5.5.9",
-        "laravel/framework": "5.1.*",
-		"illuminate/html": "~5.0",
-        "doctrine/dbal": "~2.4",
-        "orchestra/imagine": "3.1.*",
-        "phansys/getid3": "2.1.*@dev",
-        "redooor/redminportal": "dev-develop"
+        "php": "^8.2",
+        "laravel/framework": "^12.0",
+        "inertiajs/inertia-laravel": "^2.0",
+        "redooor/redminportal": "^2.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.0",
-		"mockery/mockery": "0.9.*",
-        "orchestra/testbench": "3.1.*"
-	},
+        "mockery/mockery": "^1.6",
+        "orchestra/testbench": "^10.0",
+        "phpunit/phpunit": "^11.5"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../redminportal",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
     "autoload": {
-        "classmap": [
-            "tests/bases",
-            "tests/RedminTestCase.php"
-        ],
         "psr-4": {
             "Redooor\\Redminstore\\": "src/"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable" : true
+    "autoload-dev": {
+        "psr-4": {
+            "Redooor\\Redminstore\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Redooor\\Redminstore\\RedminstoreServiceProvider"
+            ],
+            "aliases": {
+                "Redminstore": "Redooor\\Redminstore\\Facades\\Redminstore"
+            }
+        }
+    }
 }

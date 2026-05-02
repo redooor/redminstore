@@ -1,86 +1,55 @@
-<?php namespace Redooor\Redminstore\Test;
+<?php
 
-use \Orchestra\Testbench\TestCase as TestBenchTestCase;
+namespace Redooor\Redminstore\Tests;
 
-class RedminTestCase extends TestBenchTestCase
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Artisan;
+use Inertia\ServiceProvider as InertiaServiceProvider;
+use Orchestra\Testbench\TestCase as TestbenchTestCase;
+use Redooor\Redminportal\RedminportalServiceProvider;
+use Redooor\Redminstore\RedminstoreServiceProvider;
+
+abstract class RedminTestCase extends TestbenchTestCase
 {
-    /**
-     * Overrides environment with in-memory sqlite database.
-     */
-    protected function getEnvironmentSetUp($app)
+    public static function applicationBasePath()
     {
-        $app['path.base'] = __DIR__ . '/../src';
-
-        $app['config']->set('database.default', 'testbench');
-        $app['config']->set('database.connections.testbench', array(
-            'driver'   => 'sqlite',
-            'database' => ':memory:',
-            'prefix'   => '',
-        ));
+        return dirname(__DIR__);
     }
-    
-    /**
-     * Sets up environment for each test.
-     * Temporariliy increase memory limit, run migrations and set Mail::pretend to true.
-     */
-    public function setUp()
+
+    protected function getPackageProviders($app): array
+    {
+        return [
+            InertiaServiceProvider::class,
+            RedminportalServiceProvider::class,
+            RedminstoreServiceProvider::class,
+        ];
+    }
+
+    protected function defineEnvironment($app): void
+    {
+        $app['config']->set('database.default', 'testing');
+        $app['config']->set('database.connections.testing', [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+            'foreign_key_constraints' => false,
+        ]);
+        $app['config']->set('app.url', 'http://localhost');
+        $app['config']->set('inertia.testing.page_paths', [
+            dirname(__DIR__) . '/src/resources/js/Pages',
+        ]);
+    }
+
+    protected function setUp(): void
     {
         parent::setUp();
 
-        ini_set('memory_limit', '400M'); // Temporarily increase memory limit to 400MB
-        
-        /**
-         * By default, Laravel keeps a log in memory of all queries that have been run for
-         * the current request. Disable logging for test to reduce memory.
-         */
-        \DB::connection()->disableQueryLog();
+        Model::unguard();
 
-        // Migrate RedminPortal tables for test
-        $this->artisan('migrate', [
-            '--database' => 'testbench',
-            '--realpath' => realpath(__DIR__.'/../vendor/redooor/redminportal/src/database/migrations'),
+        Artisan::call('migrate', [
+            '--database' => 'testing',
+            '--realpath' => realpath(__DIR__ . '/../vendor/redooor/redminportal/src/database/migrations')
+                ?: '/Users/andrewsang/Development/redooor/redminportal/src/database/migrations',
         ]);
-
-        \Mail::pretend(true);
-    }
-
-    /**
-     * Points base path to testbench's fixture.
-     */
-    protected function getApplicationPaths()
-    {
-        $basePath = realpath(__DIR__.'/../vendor/orchestra/testbench/fixture');
-
-        return array(
-            'app'     => "{$basePath}/app",
-            'public'  => "{$basePath}/public",
-            'base'    => $basePath,
-            'storage' => "{$basePath}/storage",
-        );
-    }
-    
-    /**
-     * Appends additional ServiceProvider for the test.
-     */
-    protected function getPackageProviders($app)
-    {
-        return [
-            'Redooor\Redminstore\RedminstoreServiceProvider',
-            'Redooor\Redminportal\RedminportalServiceProvider',
-            'Illuminate\Html\HtmlServiceProvider'
-        ];
-    }
-
-    /**
-     * Appends additional Aliases for the test.
-     */
-    protected function getPackageAliases($app)
-    {
-        return [
-            'Redminstore' => 'Redooor\Redminstore\Facades\Redminstore',
-            'Redminportal' => 'Redooor\Redminportal\Facades\Redminportal',
-            'Form'      => 'Illuminate\Html\FormFacade',
-            'HTML'      => 'Illuminate\Html\HtmlFacade'
-        ];
     }
 }

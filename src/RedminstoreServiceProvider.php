@@ -1,56 +1,32 @@
-<?php namespace Redooor\Redminstore;
+<?php
+
+namespace Redooor\Redminstore;
 
 use Illuminate\Support\ServiceProvider;
+use Inertia\Inertia;
+use Redooor\Redminstore\App\Classes\Redminstore;
 
 class RedminstoreServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap the application services.
-     *
-     * @return void
-     */
-    public function boot()
+    public function boot(): void
     {
-        // Get routes
-        include __DIR__.'/App/Http/routes.php';
-        
-        // Get views
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'redminstore');
-        
-        // Establish Translator Namespace
-        $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'redminstore');
-        
-        // Allow end users to publish and modify views
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'redminstore');
+        $this->loadTranslationsFrom(__DIR__ . '/resources/lang', 'redminstore');
+
+        Inertia::setRootView('redminstore::app');
+
         $this->publishes([
-            __DIR__.'/resources/views' => base_path('resources/views/vendor/redooor/redminstore'),
-        ]);
-        
-        // Allow end users to publish and modify public assets
+            __DIR__ . '/resources/views' => resource_path('views/vendor/redooor/redminstore'),
+        ], 'redminstore-views');
+
         $this->publishes([
-            __DIR__.'/public' => public_path('vendor/redooor/redminstore'),
-        ], 'public');
+            __DIR__ . '/public' => public_path('vendor/redooor/redminstore'),
+        ], 'redminstore-public');
     }
 
-    /**
-     * Register the application services.
-     *
-     * @return void
-     */
-    public function register()
+    public function register(): void
     {
-        // Load autoload for package development environment only
-        $autoloader = __DIR__ . '/../vendor/autoload.php';
-        if (file_exists($autoloader)) {
-            require_once $autoloader;
-        }
-        
-        $this->app->register('Orchestra\Imagine\ImagineServiceProvider');
-        
-        $this->app->booting(function() {
-            $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-            $loader->alias('Redminstore', 'Redooor\Redminstore\Facades\Redminstore');
-            $loader->alias('Redminportal', 'Redooor\Redminportal\Facades\Redminportal');
-            $loader->alias('Imagine', 'Orchestra\Imagine\Facade');
-        });
+        $this->app->singleton('redminstore', fn () => new Redminstore());
     }
 }

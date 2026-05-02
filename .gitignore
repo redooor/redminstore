@@ -4,3 +4,7 @@ composer.lock
 .DS_Store
 /node_modules
 /bower_components
+/.phpunit.cache
+/bootstrap/cache/*.php
+/storage/framework/views/*.php
+/src/public/build

@@ -1,14 +1,15 @@
 # RedminStore
 
-RedminStore is a Laravel 12 package that provides an Inertia, Vue 3, and Tailwind CSS storefront for ecommerce sites administered with RedminPortal.
+RedminStore is a Laravel 12/13 package that provides an Inertia, Vue 3, and Tailwind CSS storefront for ecommerce sites administered with RedminPortal.
 
 This package is intentionally small. It is meant to show developers how to build a public catalog and CMS frontend on top of RedminPortal models, not to provide a complete cart or checkout system.
 
 ## Compatibility
 
-| Laravel | RedminPortal | RedminStore |
-|:-------:|:------------:|:-----------:|
-| 12.x    | 2.x          | 1.x         |
+| Laravel | PHP | RedminPortal | RedminStore |
+|:-------:|:---:|:------------:|:-----------:|
+| 12.x    | 8.2+ | 2.x          | 1.x         |
+| 13.x    | 8.3+ | 3.x          | 1.x         |
 
 ## Features
 
@@ -54,7 +55,7 @@ During theme development, run:
 npm run dev
 ```
 
-## Installing In A Laravel 12 App
+## Installing In A Laravel 12 Or 13 App
 
 Require the package from your Laravel app, publish assets, and run RedminPortal migrations/seeds as needed:
 
@@ -68,6 +69,8 @@ The package is auto-discovered by Laravel through `composer.json`. Published ass
 ```text
 public/vendor/redooor/redminstore
 ```
+
+For Laravel 13, use PHP 8.3 or newer and RedminPortal 3.x.
 
 ## Routes
 

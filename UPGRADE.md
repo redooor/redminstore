@@ -2,15 +2,13 @@
 
 ## From 0.1.x To 1.x
 
-RedminStore 1.x is a full modernization for Laravel 12 and Laravel 13.
+RedminStore 1.x is a full modernization for Laravel 13.
 
 ### Requirements
 
-- PHP 8.2 or newer for Laravel 12
-- PHP 8.3 or newer for Laravel 13
-- Laravel 12 or Laravel 13
-- RedminPortal 2.x for Laravel 12
-- RedminPortal 3.x for Laravel 13
+- PHP 8.3 or newer
+- Laravel 13
+- RedminPortal 2.x (the first RedminPortal release for Laravel 13; there is no Laravel 12 release)
 - Node.js suitable for Vite 6
 
 ### Removed
@@ -57,9 +55,9 @@ Run `composer update` after changing the local RedminPortal checkout.
 
 Laravel 13 support is expressed through Composer constraints:
 
-- `laravel/framework`: `^12.0 || ^13.0`
-- `orchestra/testbench`: `^10.0 || ^11.0`
+- `laravel/framework`: `^13.0`
+- `orchestra/testbench`: `^11.0`
 - `phpunit/phpunit`: `^11.5 || ^12.5`
-- `redooor/redminportal`: `^2.0 || ^3.0`
+- `redooor/redminportal`: `^2.0`
 
-The local development stack has been verified with PHP 8.3, Laravel 13, RedminPortal 3, Orchestra Testbench 11, and PHPUnit 12.
+The local development stack has been verified with PHP 8.3, Laravel 13, RedminPortal 2, Orchestra Testbench 11, and PHPUnit 12.

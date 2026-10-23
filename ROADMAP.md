@@ -162,6 +162,10 @@ Verification remained green: `composer validate --strict`, `composer test`, and 
 - Add examples for overriding views and customizing Vue pages.
 - Add release checklist for future Laravel and RedminPortal upgrades.
 
+## Laravel 13 Only / RedminPortal 2.x
+
+RedminPortal 2.0.0 is the first RedminPortal release for Laravel 13; no Laravel 12 release (and no 3.x) will be made. RedminStore therefore requires PHP `^8.3`, `laravel/framework` `^13.0`, `orchestra/testbench` `^11.0` and `redooor/redminportal` `^2.0`. This supersedes the Laravel 12 / RedminPortal 3.x notes above.
+
 ## Suggested Next Step
 
 The next highest-value step is Phase 1: install the upgraded package in a clean Laravel 12 application with the local RedminPortal checkout, publish assets, run migrations, seed sample data, and verify the storefront manually in a browser.

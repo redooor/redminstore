@@ -71,6 +71,16 @@ public/vendor/redooor/redminstore
 
 Use PHP 8.3 or newer and RedminPortal 2.x.
 
+## Sample Data (Optional)
+
+To try the storefront with demo content, run the optional seeder after the RedminPortal migrations and after publishing the assets above:
+
+```bash
+php artisan db:seed --class="Redooor\Redminstore\Database\Seeders\SampleDataSeeder"
+```
+
+It creates 3 categories, 12 products (including variants, a bundle, one featured set and one hidden inactive product), 3 public pages, 2 public posts, plus private examples that stay hidden, and uses small placeholder images shipped with the package (visible on the storefront; the admin thumbnails for them will look broken). It is never run by a plain `db:seed`, and it can be run again safely: records are matched by name, SKU (prefixed `DEMO-`) or slug and are never overwritten if they already exist. Delete the sample records from the RedminPortal admin when you are done.
+
 ## Routes
 
 RedminStore registers public routes:

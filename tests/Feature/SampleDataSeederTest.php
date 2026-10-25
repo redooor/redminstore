@@ -86,6 +86,11 @@ class SampleDataSeederTest extends RedminTestCase
         foreach (Image::pluck('path') as $path) {
             $file = dirname(__DIR__, 2) . '/src/public/' . substr($path, strlen('vendor/redooor/redminstore/'));
             $this->assertFileExists($file);
+
+            // RedminPortal admin thumbnails: <dir>/<dimension>/<file>
+            foreach (['100x100_crop', '600x400', '800x600'] as $dimension) {
+                $this->assertFileExists(dirname($file) . '/' . $dimension . '/' . basename($file));
+            }
         }
     }
 }

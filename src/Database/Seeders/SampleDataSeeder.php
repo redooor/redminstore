@@ -23,8 +23,9 @@ use Redooor\Redminportal\App\Models\Tag;
  * Requires the RedminPortal migrations and `php artisan vendor:publish --tag=redminstore-public`
  * (the sample images are served from public/vendor/redooor/redminstore/img/sample).
  *
- * Note: the images appear on the storefront only. The RedminPortal admin shows resized copies
- * (e.g. 100x100_crop/...) that are not generated for these placeholders, so admin thumbnails look broken.
+ * The RedminPortal admin links resized copies by naming convention (e.g. 100x100_crop/<file>), so the
+ * SVGs are also shipped in the dimension folders from RedminPortal's config/image.php. If you change
+ * those dimensions, copy the SVGs into matching folders.
  */
 class SampleDataSeeder extends Seeder
 {

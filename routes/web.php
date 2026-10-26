@@ -14,4 +14,10 @@ Route::middleware('web')->group(function () {
     Route::get('products', [StorefrontController::class, 'products'])->name('redminstore.products.index');
     Route::get('products/{product}', [StorefrontController::class, 'product'])->whereNumber('product')->name('redminstore.products.show');
     Route::get('categories/{category}', [StorefrontController::class, 'category'])->whereNumber('category')->name('redminstore.categories.show');
+
+    // Pages at the root ("/about"). A fallback route only runs when nothing else matched, so it
+    // can never shadow the host app's routes, whatever order they were registered in.
+    if (config('redminstore.pages_at_root')) {
+        Route::fallback([StorefrontController::class, 'rootPage'])->name('redminstore.pages.root');
+    }
 });

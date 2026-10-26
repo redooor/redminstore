@@ -44,7 +44,7 @@ class SampleDataSeederTest extends RedminTestCase
 
         $this->assertCount(3, Bundle::where('sku', 'DEMO-BUN-001')->firstOrFail()->products);
 
-        $this->get('/page/about-us')->assertOk();
+        $this->get('/about-us')->assertOk();
         $this->get('/page/internal-notes')->assertNotFound();
         $this->get('/post/upcoming-announcement')->assertNotFound();
     }

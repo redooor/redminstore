@@ -29,7 +29,9 @@ class StorefrontPageTest extends RedminTestCase
             'private' => false,
         ]);
 
-        $this->get('/page/about')
+        $this->get('/page/about')->assertRedirect('/about')->assertStatus(301);
+
+        $this->get('/about')
             ->assertOk()
             ->assertInertia(fn (Assert $page) => $page
                 ->component('CmsPage')

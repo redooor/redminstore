@@ -86,13 +86,26 @@ It creates 3 categories, 12 products (including variants, a bundle, one featured
 RedminStore registers public routes:
 
 - `/`
-- `/page/{slug}`
+- `/{slug}` for public CMS pages (see below)
+- `/page/{slug}` (redirects to `/{slug}`)
 - `/post/{slug}`
 - `/products`
 - `/products/{product}`
 - `/categories/{category}`
 
 The admin backend remains RedminPortal's responsibility.
+
+### Pages at the site root
+
+A public page created in RedminPortal is served at the site root, like a typical CMS: a page with slug `about` appears at `/about`, and `/page/about` redirects to it. Pages marked private in RedminPortal return 404.
+
+This is registered as a Laravel fallback route, so it only runs when nothing else matches. Your own routes, RedminPortal's `/admin` and `/login`, and the storefront routes (`/products`, `/categories/...`) always win over a page with the same slug, so avoid giving a page the slug `products`, `admin`, `login`, etc. Only single-segment slugs are supported, and unknown URLs fall through to your app's normal 404.
+
+To keep pages under `/page/{slug}` instead, publish the config and set `pages_at_root` to `false`:
+
+```bash
+php artisan vendor:publish --tag=redminstore-config
+```
 
 ## Testing
 

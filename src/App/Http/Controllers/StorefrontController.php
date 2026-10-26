@@ -42,16 +42,29 @@ class StorefrontController extends Controller
         ]);
     }
 
-    public function page(string $slug): Response|SymfonyResponse
+    /** Fallback route: serve a public page at "/{slug}", otherwise defer to the app's normal 404. */
+    public function rootPage(Request $request): Response|SymfonyResponse
     {
+        $slug = trim($request->path(), '/');
+
+        if (! $request->isMethod('GET') || str_contains($slug, '/') || ! $this->validSlug($slug) || ! $this->publicPage($slug)) {
+            abort(404);
+        }
+
+        return $this->page($slug, $request);
+    }
+
+    public function page(string $slug, ?Request $request = null): Response|SymfonyResponse
+    {
+        if (config('redminstore.pages_at_root') && ($request ?? request())->routeIs('redminstore.pages.show') && $this->publicPage($slug)) {
+            return redirect()->to('/' . $slug, 301);
+        }
+
         if (! $this->validSlug($slug)) {
             return $this->notFound();
         }
 
-        $page = Page::query()
-            ->where('slug', $slug)
-            ->where('private', false)
-            ->first();
+        $page = $this->publicPage($slug);
 
         if (! $page) {
             return $this->notFound();
@@ -170,6 +183,11 @@ class StorefrontController extends Controller
             ->setStatusCode(404);
     }
 
+    private function publicPage(string $slug): ?Page
+    {
+        return Page::query()->where('slug', $slug)->where('private', false)->first();
+    }
+
     private function validSlug(string $slug): bool
     {
         return Validator::make(['slug' => $slug], ['slug' => ['required', 'alpha_dash']])->passes();
@@ -220,7 +238,9 @@ class StorefrontController extends Controller
             'id' => $content->id,
             'title' => $content->title,
             'slug' => $content->slug,
-            'url' => route("redminstore.{$type}s.show", $content->slug),
+            'url' => $type === 'page' && config('redminstore.pages_at_root')
+                ? url('/' . $content->slug)
+                : route("redminstore.{$type}s.show", $content->slug),
         ];
     }
 

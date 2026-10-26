@@ -10,6 +10,7 @@ class RedminstoreServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        $this->mergeConfigFrom(__DIR__ . '/config/redminstore.php', 'redminstore');
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'redminstore');
         $this->loadTranslationsFrom(__DIR__ . '/resources/lang', 'redminstore');
@@ -19,6 +20,10 @@ class RedminstoreServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/resources/views' => resource_path('views/vendor/redooor/redminstore'),
         ], 'redminstore-views');
+
+        $this->publishes([
+            __DIR__ . '/config/redminstore.php' => config_path('redminstore.php'),
+        ], 'redminstore-config');
 
         $this->publishes([
             __DIR__ . '/public' => public_path('vendor/redooor/redminstore'),

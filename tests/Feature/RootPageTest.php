@@ -60,4 +60,19 @@ class RootPageTest extends RedminTestCase
 
         $this->get('/page/about')->assertStatus(301)->assertRedirect('/about');
     }
+
+    public function test_head_request_is_served(): void
+    {
+        $this->page('about');
+
+        $this->call('HEAD', '/about')->assertOk();
+    }
+
+    public function test_turning_the_option_off_at_runtime_disables_a_cached_fallback(): void
+    {
+        $this->page('about');
+        config(['redminstore.pages_at_root' => false]);
+
+        $this->get('/about')->assertNotFound();
+    }
 }

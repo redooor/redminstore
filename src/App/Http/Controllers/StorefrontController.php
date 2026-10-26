@@ -47,7 +47,7 @@ class StorefrontController extends Controller
     {
         $slug = trim($request->path(), '/');
 
-        if (! $request->isMethod('GET') || str_contains($slug, '/') || ! $this->validSlug($slug) || ! $this->publicPage($slug)) {
+        if (! config('redminstore.pages_at_root') || ! $request->isMethod('GET') && ! $request->isMethod('HEAD') || str_contains($slug, '/') || ! $this->validSlug($slug) || ! $this->publicPage($slug)) {
             abort(404);
         }
 

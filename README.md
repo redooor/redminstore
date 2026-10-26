@@ -133,7 +133,7 @@ return [
 ];
 ```
 
-If you cache your config, run `php artisan config:clear` (or `config:cache` again) after changing it. With the option off, the home page also links to `/page/{slug}`.
+If you cache your config, run `php artisan config:clear` (or `config:cache` again) after changing it, and `php artisan route:clear` (or `route:cache` again) if you cache your routes. With the option off, the home page also links to `/page/{slug}`.
 
 If you are using RedminPortal without RedminStore, see "Showing pages on your own frontend" in the RedminPortal README for how to build the same thing in your own Laravel app.
 

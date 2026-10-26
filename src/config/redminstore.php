@@ -16,5 +16,5 @@ return [
     | pages at "/page/{slug}" only.
     |
     */
-    'pages_at_root' => true,
+    'pages_at_root' => env('REDMINSTORE_PAGES_AT_ROOT', true),
 ];

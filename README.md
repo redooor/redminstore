@@ -97,15 +97,45 @@ The admin backend remains RedminPortal's responsibility.
 
 ### Pages at the site root
 
-A public page created in RedminPortal is served at the site root, like a typical CMS: a page with slug `about` appears at `/about`, and `/page/about` redirects to it. Pages marked private in RedminPortal return 404.
+RedminStore shows your RedminPortal pages at the site root, like a typical CMS, instead of under a prefix such as `/page/about`.
 
-This is registered as a Laravel fallback route, so it only runs when nothing else matches. Your own routes, RedminPortal's `/admin` and `/login`, and the storefront routes (`/products`, `/categories/...`) always win over a page with the same slug, so avoid giving a page the slug `products`, `admin`, `login`, etc. Only single-segment slugs are supported, and unknown URLs fall through to your app's normal 404.
+**How to use it**
 
-To keep pages under `/page/{slug}` instead, publish the config and set `pages_at_root` to `false`:
+1. In the RedminPortal admin, open **Pages** and create a page. Give it a **Title**, some **Content**, and a **Slug**, for example `about`.
+2. Leave **Private** unchecked. Private pages are never shown on the storefront.
+3. Visit `/about`. The page is live immediately; there is nothing to publish or configure. `/page/about` redirects to `/about`.
+
+**Rules**
+
+- Only single-segment slugs work (`about`, `shipping-and-returns`). Letters, numbers, `-` and `_` only.
+- It is a Laravel fallback route, so it only runs when no other route matches. Your own routes, RedminPortal's `/admin` and `/login`, and the storefront routes (`/products`, `/categories/...`) always win over a page with the same slug. Avoid slugs such as `products`, `admin` or `login`.
+- URLs that match nothing fall through to your app's normal 404 page.
+
+**Turning it off (the `redminstore.pages_at_root` option)**
+
+It is on by default. To keep pages at `/page/{slug}` only, set it to `false` using either of these:
+
+```dotenv
+# .env
+REDMINSTORE_PAGES_AT_ROOT=false
+```
+
+or publish the config file and edit it:
 
 ```bash
 php artisan vendor:publish --tag=redminstore-config
 ```
+
+```php
+// config/redminstore.php
+return [
+    'pages_at_root' => false,
+];
+```
+
+If you cache your config, run `php artisan config:clear` (or `config:cache` again) after changing it. With the option off, the home page also links to `/page/{slug}`.
+
+If you are using RedminPortal without RedminStore, see "Showing pages on your own frontend" in the RedminPortal README for how to build the same thing in your own Laravel app.
 
 ## Testing
 
